@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonder What Time It Is</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #282c34;
+            color: #ff6f61;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .clock {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: 15px solid #ff6f61;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(255, 111, 97, 0.6); /* Soft glow effect */
+        }
+
+        /* Heart shape with shadow */
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            transform: rotate(-45deg);
+            top: 50%;
+            left: 50%;
+            margin-left: -15px;
+            margin-top: -10px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -15px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 15px;
+        }
+
+        .text {
+            position: absolute;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ff6f61;
+            transform-origin: center;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+        }
+
+        .hand {
+            position: absolute;
+            background-color: #ff6f61;
+            transform-origin: bottom center;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(255, 111, 97, 0.8); /* Adds depth */
+        }
+
+        .hour-hand {
+            width: 10px;
+            height: 130px;
+            top: 120px;
+            left: 245px;
+        }
+
+        .minute-hand {
+            width: 6px;
+            height: 180px;
+            top: 70px;
+            left: 247px;
+        }
+
+        .second-hand {
+            width: 3px;
+            height: 220px;
+            top: 40px;
+            left: 248px;
+            background-color: #ff6f61;
+        }
+
+        .text:nth-child(n) {
+            transform: rotate(calc(var(--i) * 30deg)) translate(200px) rotate(calc(var(--i) * -30deg));
+        }
+
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <!-- "I Miss U" text around the clock -->
+        <div class="text" style="--i: 0;">I MISS U</div>
+        <div class="text" style="--i: 1;">I MISS U</div>
+        <div class="text" style="--i: 2;">I MISS U</div>
+        <div class="text" style="--i: 3;">I MISS U</div>
+        <div class="text" style="--i: 4;">I MISS U</div>
+        <div class="text" style="--i: 5;">I MISS U</div>
+        <div class="text" style="--i: 6;">I MISS U</div>
+        <div class="text" style="--i: 7;">I MISS U</div>
+        <div class="text" style="--i: 8;">I MISS U</div>
+        <div class="text" style="--i: 9;">I MISS U</div>
+        <div class="text" style="--i: 10;">I MISS U</div>
+        <div class="text" style="--i: 11;">I MISS U</div>
+
+        <!-- Clock hands -->
+        <div class="hand hour-hand" id="hour-hand"></div>
+        <div class="hand minute-hand" id="minute-hand"></div>
+        <div class="hand second-hand" id="second-hand"></div>
+
+        <!-- Heart Shape in the Center -->
+        <div class="heart"></div>
+    </div>
+
+    <script>
+        const hourHand = document.getElementById('hour-hand');
+        const minuteHand = document.getElementById('minute-hand');
+        const secondHand = document.getElementById('second-hand');
+
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const hourDeg = (hours % 12) * 30 + (minutes / 2);
+            const minuteDeg = minutes * 6 + (seconds / 10);
+            const secondDeg = seconds * 6;
+
+            hourHand.style.transform = `rotate(${hourDeg}deg)`;
+            minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+            secondHand.style.transform = `rotate(${secondDeg}deg)`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
